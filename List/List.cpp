@@ -9,6 +9,7 @@ void List<T>::init() {
 	_size = 0;
 }
 
+// 索引取值
 template<typename T>
 ListNodePosi(T) List<T>::operator[](int r) const {
 	ListNodePosi(T) p = first();  // 从首结点出发
@@ -62,7 +63,7 @@ ListNodePosi(T) List<T>::insertAfter(ListNodePosi(T) p, T const& e) {
 template<typename T>
 void List<T>::copyNodes(ListNodePosi(T) p, int n) {
 	init();   // 创建头尾哨兵结点
-	while (n--) { insertAsLast(p->data); p = p->succ; }
+	while (n--) { this->insertAsLast(p->data); p = p->succ; }
 }
 
 /*
@@ -126,6 +127,7 @@ int List<T>::deduplicate() {
 	int oldsize = _size;
 	ListNodePosi(T) p = header; Rank r = 0;  // 从头开始
 	while (trailer != p) {
+		// p的前r个元素中是否存在p->data
 		ListNodePosi(T) q = find(p->data, r, p);
 		q ? remove(q) : r++;
 		p = p->succ;
